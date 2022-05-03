@@ -1,0 +1,30 @@
+services:
+  db:
+    image: postgres
+    restart: on-failure
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=1283
+    volumes:
+      - ./db-data:/var/lib/postgresql/data:z
+    networks:
+      - backendNetwork
+
+  api:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 5000:80
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ConnectionStrings:PostgreSqlConnection=Username=postgres;Server=db;Database=dotnet;Password=1283;Port=5432;Integrated Security=true;"
+    depends_on:
+      - db
+    networks:
+      - backendNetwork
+
+networks:
+  backendNetwork:
+    driver: bridge
