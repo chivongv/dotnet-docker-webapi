@@ -1,4 +1,4 @@
-CREATE TABLE Products(
-    Id serial,
-    Name varchar(500)
+CREATE TABLE "Products"(
+    "Id" serial,
+    "Name" varchar(500)
 );
