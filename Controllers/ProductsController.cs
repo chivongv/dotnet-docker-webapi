@@ -44,9 +44,42 @@ public class ProductsController : ControllerBase
     [HttpPost]
     public async Task<IResponse> AddProduct(Product obj)
     {
-        await _context.Products.AddAsync(obj);
+        _context.Products.Add(obj);
         await _context.SaveChangesAsync();
 
         return new Response(200, true);
+    }
+
+    [HttpPut]
+    public async Task<IResponse> UpdateProduct(Product obj)
+    {
+        try
+        {
+            _context.Products.Update(obj);
+            await _context.SaveChangesAsync();
+
+            return new Response(200, true);
+        }
+        catch (Exception e)
+        {
+            return new Response(400, false);
+        }
+
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IResponse> RemoveProductById(int? id)
+    {
+        var product = await _context.Products.FindAsync(id);
+
+        if (product is not null)
+        {
+            _context.Products.Remove(product);
+            await _context.SaveChangesAsync();
+
+            return new Response(200, true);
+        }
+
+        return new Response(404, false);
     }
 }
