@@ -1,7 +1,9 @@
-using dotnet_docker_webapi.Contexts;
 using Microsoft.EntityFrameworkCore;
+using dotnet_docker_webapi.Contexts;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var connection = builder.Configuration.GetConnectionString("PostgreSqlConnection") + "Password=" + builder.Configuration["DbPassword"] + ";";
 
 // Add services to the container.
 
@@ -17,7 +19,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ProductContext>(options =>
 {
-    options.UseNpgsql(builder.Configuration.GetConnectionString("PostgreSqlConnection"));
+    options.UseNpgsql(connection);
 });
 builder.Services.AddCors(options =>
 {

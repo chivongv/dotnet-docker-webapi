@@ -1,10 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>dotnet_docker_webapi</RootNamespace>
+    <UserSecretsId>00d1dafc-0f97-4261-ac44-e94f51d33ed7</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

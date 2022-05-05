@@ -24,7 +24,6 @@ public class ProductsController : ControllerBase
     public async Task<IResponse> GetAll()
     {
         var products = await _context.Products.ToListAsync();
-
         return new DataResponse<List<Product>>(200, products);
     }
 
@@ -50,7 +49,7 @@ public class ProductsController : ControllerBase
         return new Response(200, true);
     }
 
-    [HttpPut]
+    [HttpPut("update")]
     public async Task<IResponse> UpdateProduct(Product obj)
     {
         try
@@ -62,13 +61,13 @@ public class ProductsController : ControllerBase
         }
         catch (Exception e)
         {
+            System.Diagnostics.Debug.WriteLine("error: " + e);
             return new Response(400, false);
         }
-
     }
 
-    [HttpDelete("{id}")]
-    public async Task<IResponse> RemoveProductById(int? id)
+    [HttpDelete("delete/{id}")]
+    public async Task<IResponse> RemoveProductById(int id)
     {
         var product = await _context.Products.FindAsync(id);
 

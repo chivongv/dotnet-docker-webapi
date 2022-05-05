@@ -17,9 +17,11 @@ services:
       dockerfile: ./Dockerfile
     ports:
       - 5000:80
+    env_file:
+      - .env
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - "ConnectionStrings:PostgreSqlConnection=Username=postgres;Server=db;Database=dotnet;Password=1283;Port=5432;Integrated Security=true;"
+      - "ConnectionStrings:PostgreSqlConnection=User Id=postgres;Server=db,5432;Database=dotnet;Integrated Security=true;"
     depends_on:
       - db
     networks:
