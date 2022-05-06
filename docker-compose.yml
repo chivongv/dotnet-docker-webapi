@@ -27,6 +27,9 @@ services:
     networks:
       - backendNetwork
 
+volumes:
+  db-data:
+
 networks:
   backendNetwork:
     driver: bridge

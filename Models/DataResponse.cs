@@ -4,7 +4,6 @@ namespace dotnet_docker_webapi.Models
     {
         public bool Success { get; } = true;
         public T Data { get; }
-
         public int StatusCode { get; }
         public string Message { get; set; } = ""!;
 

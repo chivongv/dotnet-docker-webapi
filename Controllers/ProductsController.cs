@@ -23,18 +23,18 @@ public class ProductsController : ControllerBase
     [HttpGet]
     public async Task<IResponse> GetAll()
     {
-        var products = await _context.Products.ToListAsync();
+        var products = await _context.Products.AsNoTracking().ToListAsync();
         return new DataResponse<List<Product>>(200, products);
     }
 
     [HttpGet("{id}")]
     public async Task<IResponse> GetById(int id)
     {
-        var product = await _context.Products.FindAsync(id);
+        var product = await _context.Products.AsNoTracking().SingleOrDefaultAsync(p => p.Id == id);
 
         if (product is null)
         {
-            return new Response(404, false);
+            return new Response(404, false, "Product couldn't be found");
         }
 
         return new DataResponse<Product>(200, product);
@@ -46,7 +46,7 @@ public class ProductsController : ControllerBase
         _context.Products.Add(obj);
         await _context.SaveChangesAsync();
 
-        return new Response(200, true);
+        return new Response(200, true, "Successfully added product");
     }
 
     [HttpPut("update")]
@@ -57,12 +57,12 @@ public class ProductsController : ControllerBase
             _context.Products.Update(obj);
             await _context.SaveChangesAsync();
 
-            return new Response(200, true);
+            return new Response(200, true, "Successfully updated product");
         }
         catch (Exception e)
         {
             System.Diagnostics.Debug.WriteLine("error: " + e);
-            return new Response(400, false);
+            return new Response(400, false, "Product couldn't be updated");
         }
     }
 
@@ -76,9 +76,9 @@ public class ProductsController : ControllerBase
             _context.Products.Remove(product);
             await _context.SaveChangesAsync();
 
-            return new Response(200, true);
+            return new Response(200, true, "Successfully deleted product");
         }
 
-        return new Response(404, false);
+        return new Response(404, false, "Product couldn't be found");
     }
 }
