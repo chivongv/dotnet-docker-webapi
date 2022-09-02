@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System;
 using System.Collections.Generic;
+using dotnet_docker_webapi.Interfaces;
 
 namespace dotnet_docker_webapi.Models;
 

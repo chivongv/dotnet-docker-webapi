@@ -1,4 +1,4 @@
-namespace dotnet_docker_webapi.Models
+namespace dotnet_docker_webapi.Interfaces
 {
     public interface IDataResponse<T> : IResponse
     {

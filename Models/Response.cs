@@ -1,3 +1,5 @@
+using dotnet_docker_webapi.Interfaces;
+
 namespace dotnet_docker_webapi.Models
 {
     public class Response : IResponse
